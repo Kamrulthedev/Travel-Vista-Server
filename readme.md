@@ -2,53 +2,53 @@
 
 Welcome to the TravelVista Server repository! This project serves as the backend for the TravelVista application, a travel tips and destination guides platform.
 
-## 🛠️ Technologies Used
+### 🛠️ Technologies Used
 
-• Node.js: Backend runtime environment.
-• Express: Web framework for building RESTful APIs.
-• Mongoose: Object Data Modeling (ODM) library for MongoDB.
-• JWT: JSON Web Tokens for secure authentication.
-• Bcrypt: Password hashing and security.
-• AmarPay: Payment system integration.
+1. • Node.js: Backend runtime environment.
+2. • Express: Web framework for building RESTful APIs.
+3. • Mongoose: Object Data Modeling (ODM) library for MongoDB.
+4. • JWT: JSON Web Tokens for secure authentication.
+5. • Bcrypt: Password hashing and security.
+6. • AmarPay: Payment system integration.
 
-## 📁 Project Structure
+### 📁 Project Structure
 
-src/
-├── app/
-├── config/
-│ └── index.js
-├── middlewares/
-│ └── errorHandler.js
-│ └── auth.js
-├── Error/
-│ └── AppError.js
-├── Module/
-│ ├── User/
-│ │ └── user.interface.js
-│ │ └── user.model.js
-│ │ └── user.service.js
-│ │ └── user.controller.js
-│ │ └── user.validation.js
-│ │ └── user.route.js
-│ ├── Post/
-│ │ └── post.interface.js
-│ │ └── post.model.js
-│ │ └── post.service.js
-│ │ └── post.controller.js
-│ │ └── post.validation.js
-│ │ └── post.route.js
-│ ├── Slot/
-│ ├── Payment/
-│ ├── Comment/
-│ ├── Follow/
-├── routes/
-│ └── index.js
-├── utils/
-└── connectDB.js
-app.js
-server.js
+- src/
+- ├── app/
+- ├── config/
+- │ └── index.js
+- ├── middlewares/
+- │ └── errorHandler.js
+- │ └── auth.js
+- ├── Error/
+- │ └── AppError.js
+- ├── Module/
+- │ ├── User/
+- │ │ └── user.interface.js
+- │ │ └── user.model.js
+- │ │ └── user.service.js
+- │ │ └── user.controller.js
+- │ │ └── user.validation.js
+- │ │ └── user.route.js
+- │ ├── Post/
+- │ │ └── post.interface.js
+- │ │ └── post.model.js
+- │ │ └── post.service.js
+- │ │ └── post.controller.js
+- │ │ └── post.validation.js
+- │ │ └── post.route.js
+- │ ├── Slot/
+- │ ├── Payment/
+- │ ├── Comment/
+- │ ├── Follow/
+- ├── routes/
+- │ └── index.js
+- ├── utils/
+- └── connectDB.js
+- app.js
+- server.js
 
-## ⚙️ Installation
+### ⚙️ Installation
 
 1. Clone the Repository:
 
