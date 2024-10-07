@@ -6,31 +6,32 @@ import {
   updateUserValidationSchema,
 } from './user.validation';
 import auth from '../../middlewares/auth';
-import { USER_ROLE } from './user.utils';
+import { USER_Role } from './user.constant';
+
 
 const router = express.Router();
 
 router.post(
-  '/',
+  '/create-user',
   validateRequest(createUserValidationSchema),
   UserController.createUser,
 );
 
-router.get('/', auth(USER_ROLE.admin), UserController.getAllUsers);
+router.get('/', auth(USER_Role.admin), UserController.getAllUsers);
 
 router.get(
   '/:id',
-  auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_Role.admin, USER_Role.user),
   UserController.findUserById,
 );
 
 router.patch(
   '/:id',
-  auth(USER_ROLE.admin),
+  auth(USER_Role.admin),
   validateRequest(updateUserValidationSchema),
   UserController.updateUserById,
 );
 
-router.delete('/:id', auth(USER_ROLE.admin), UserController.deleteUserById);
+router.delete('/:id', auth(USER_Role.admin), UserController.deleteUserById);
 
 export const UserRoutes = router;

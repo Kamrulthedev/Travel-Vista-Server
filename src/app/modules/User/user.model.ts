@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-escape */
 // models/User.ts
 import mongoose, { Schema } from 'mongoose';
-import { IUser } from './user.interface';
 import { validateEmail } from './user.utils';
+import { IUser } from './user.interface';
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
   name: {
@@ -30,8 +30,6 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     default: 'user',
   },
   img: { type: String },
-  rating: { type: Number, default: 0 },
-  rents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rent' }],
 });
 
 export const User = mongoose.model<IUser>('User', userSchema);

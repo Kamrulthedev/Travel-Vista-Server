@@ -1,11 +1,12 @@
-import { Types } from 'mongoose';
+import { USER_Role } from "./user.constant";
 
 export interface IUser {
   name: string;
-  img: string;
-  rating: number;
   email: string;
   password: string;
-  role: 'admin' | 'user';
-  rents: Types.ObjectId;
+  phone: string;
+  role:keyof typeof USER_Role;
+  address: string;
+  img: string;
+  passwordChangedAt?: Date;
 }

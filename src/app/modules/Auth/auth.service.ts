@@ -1,12 +1,11 @@
 import httpStatus from 'http-status';
 import config from '../../config';
 import AppError from '../../errors/AppError';
-
 import bcryptJs from 'bcryptjs';
 import { User } from '../User/user.model';
-import { USER_ROLE } from '../User/user.utils';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
+import { USER_Role } from '../User/user.constant';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -70,7 +69,6 @@ const loginUser = async (payload: TLoginUser) => {
       refreshToken,
     };
   }
-  // checking if the user is already deleted
 };
 
 const refreshToken = async (token: string) => {
@@ -111,7 +109,7 @@ const registerUser = async (userData: TLoginUser) => {
   }
   const user = await User.create({
     ...userData,
-    role: USER_ROLE.user,
+    role: USER_Role.user,
   });
 
   return user;
