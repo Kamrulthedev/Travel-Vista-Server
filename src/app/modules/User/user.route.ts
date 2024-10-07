@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from "express";
 import validateRequest from '../../middlewares/validateRequest';
 import { UserController } from './user.controller';
 import {
@@ -7,12 +7,17 @@ import {
 } from './user.validation';
 import auth from '../../middlewares/auth';
 import { USER_Role } from './user.constant';
+import { upload } from '../../utils/sendImgToClodinary';
 
 const router = express.Router();
 
 router.post(
   '/create-user',
-  auth(USER_Role.admin, USER_Role.user),
+  upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next()
+  },
   validateRequest(createUserValidationSchema),
   UserController.createUser,
 );
