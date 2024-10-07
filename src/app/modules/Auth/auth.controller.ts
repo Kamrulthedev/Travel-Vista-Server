@@ -36,7 +36,7 @@ const refreshToken = catchAsync(async (req, res) => {
 });
 
 const registerUser = catchAsync(async (req, res) => {
-  const result = await AuthServices.registerUser(req.body);
+  const result = await AuthServices.registerUser(req.body, req.file);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -6,6 +6,7 @@ import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
 import { USER_Role } from '../User/user.constant';
+import { SendImgToClodinary } from '../../utils/sendImgToClodinary';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -100,13 +101,23 @@ const refreshToken = async (token: string) => {
   };
 };
 
-const registerUser = async (userData: TLoginUser) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const registerUser = async (userData: TLoginUser, file?: any) => {
   if (userData.password) {
     userData.password = await bcryptJs.hash(
       userData.password,
       Number(config.bcrypt_salt_rounds),
     );
   }
+
+  //create imageName and Path
+  const imageName = `${userData?.name}`;
+  const path = file?.path;
+  //send Img cludinary
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { secure_url }: any = await SendImgToClodinary(imageName, path);
+  userData.profileImg = secure_url;
+
   const user = await User.create({
     ...userData,
     role: USER_Role.user,
@@ -114,8 +125,6 @@ const registerUser = async (userData: TLoginUser) => {
 
   return user;
 };
-
-
 
 export const AuthServices = {
   loginUser,

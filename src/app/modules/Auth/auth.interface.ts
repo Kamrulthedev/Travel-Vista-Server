@@ -1,6 +1,6 @@
 export type TLoginUser = {
-  name?: string;
-  img?: string;
+  name: string;
+  profileImg?: string;
   email: string;
   password?: string;
 };

@@ -3,7 +3,7 @@ import { z } from 'zod';
 const loginValidationSchema = z.object({
   body: z.object({
     name: z.string().optional(),
-    img: z.string().optional(),
+    profileImg: z.string().optional(),
     email: z.string({ required_error: 'Id is required.' }),
     password: z.string().optional(),
   }),
@@ -22,7 +22,7 @@ export const registerUserValidationSchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string().optional(),
-    img: z.string().optional(), 
+    profileImg: z.string().optional(), 
   }),
 });
 

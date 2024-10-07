@@ -1,7 +1,8 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import { AuthValidation } from './auth.validation';
 import { AuthControllers } from './auth.controller';
+import { upload } from '../../utils/sendImgToClodinary';
 
 const router = express.Router();
 
@@ -19,6 +20,11 @@ router.post(
 
 router.post(
   '/register',
+  upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next()
+  },
   validateRequest(AuthValidation.registerUserValidationSchema),
   AuthControllers.registerUser,
 );
