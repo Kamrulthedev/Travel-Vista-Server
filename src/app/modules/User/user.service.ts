@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import QueryBuilder from '../../builder/QueryBuilder';
 import config from '../../config';
-import { SendImgToClodinary } from '../../utils/sendImgToClodinary';
 import { UserSearchableFields } from './user.constant';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import bcryptJs from 'bcryptjs';
 
 //create user
-const createUser = async (user: IUser, file: any) => {
+const createUser = async (user: IUser, url: any) => {
   user.password = await bcryptJs.hash(
     user.password,
     Number(config.bcrypt_salt_rounds),
   );
 
   //create imageName and Path
-  const imageName = `${user?.phone}${user?.name}`;
-  const path = file?.path;
-  //send Img cludinary
-  const { secure_url }: any = await SendImgToClodinary(imageName, path);
-  user.profileImg = secure_url;
+  // const imageName = `${user?.phone}${user?.name}`;
+  // const path = file?.path;
+  // //send Img cludinary
+  // const { secure_url }: any = await SendImgToClodinary(imageName, path);
+  
+  user.profileImg = url;
 
   return await User.create(user);
 };
