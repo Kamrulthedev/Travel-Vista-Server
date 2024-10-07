@@ -85,26 +85,39 @@ npm run start
 ### 📋 Endpoints
 
 #### Authentication
-Register User: POST /api/v1/auth/register
-Login User: POST /api/v1/auth/login
-User
-Get User Details: GET /api/v1/users/:id
-Update User: PATCH /api/v1/users/:id
-Post
-Create Post: POST /api/v1/posts
-Get All Posts: GET /api/v1/posts
-Update Post: PATCH /api/v1/posts/:id
-Delete Post: DELETE /api/v1/posts/:id
-Payments
-Create Payment: POST /api/v1/payments
-Get Payment Details: GET /api/v1/payments/:id
-🧪 Testing
+
+- • Register User: POST /api/v1/auth/register
+- • Login User: POST /api/v1/auth/login
+-
+-
+
+#### User
+
+- • Get User Details: GET /api/v1/users/:id
+- • Update User: PATCH /api/v1/users/:id
+
+#### Post
+
+- • Create Post: POST /api/v1/posts
+- • Get All Posts: GET /api/v1/posts
+- • Update Post: PATCH /api/v1/posts/:id
+- • Delete Post: DELETE /api/v1/posts/:id
+
+#### Payments
+
+- • Create Payment: POST /api/v1/payments
+- • et Payment Details: GET /api/v1/payments/:id
+
+### 🧪 Testing
+
 To run tests:
 
-bash
-Copy code
+```bash
 npm run test
-🌐 Deployment
+```
+
+### 🌐 Deployment
+
 For deployment:
 
 Install Heroku CLI and log in to your Heroku account:
