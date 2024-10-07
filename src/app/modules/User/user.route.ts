@@ -22,7 +22,7 @@ router.post(
   UserController.createUser,
 );
 
-router.get('/', auth(USER_Role.admin), UserController.getAllUsers);
+router.get('/', auth(USER_Role.admin, USER_Role.user), UserController.getAllUsers);
 
 router.get(
   '/:id',
@@ -32,11 +32,11 @@ router.get(
 
 router.patch(
   '/:id',
-  auth(USER_Role.admin),
+  auth(USER_Role.admin, USER_Role.user),
   validateRequest(updateUserValidationSchema),
   UserController.updateUserById,
 );
 
-router.delete('/:id', auth(USER_Role.admin), UserController.deleteUserById);
+router.delete('/:id', auth(USER_Role.admin, USER_Role.user), UserController.deleteUserById);
 
 export const UserRoutes = router;

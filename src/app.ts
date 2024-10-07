@@ -16,7 +16,7 @@ app.use(cookieParser())
 app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
-  res.status(200).json('Hello Travelar..................');
+  res.status(200).json('Hello Travelar........');
 });
 
 app.use(globalErrorHandler);

@@ -16,13 +16,15 @@ const auth = (...requiredRoles: (keyof typeof USER_Role)[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
     }
 
+
     // checking if the given token is valid
     const decoded = jwt.verify(
-      token,
+      token.split(' ')[1],
       config.jwt_access_secret as string,
     ) as JwtPayload;
 
     const { role, email } = decoded;
+
 
     // checking if the user is exist
     const user = await User.findOne({ email });

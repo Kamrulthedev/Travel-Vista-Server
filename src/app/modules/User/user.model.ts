@@ -22,6 +22,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         'Please fill a valid email address',
       ],
     },
+    phone: { type: String },
     password: {
       type: String,
     },
@@ -31,6 +32,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
       default: 'user',
     },
     profileImg: { type: String },
+    address: { type: String },
     needsPasswordChange: {
       type: Boolean,
       default: true,
