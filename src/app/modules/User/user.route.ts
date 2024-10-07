@@ -12,7 +12,6 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.admin),
   validateRequest(createUserValidationSchema),
   UserController.createUser,
 );
