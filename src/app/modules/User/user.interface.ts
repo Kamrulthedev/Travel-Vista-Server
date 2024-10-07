@@ -10,4 +10,5 @@ export interface IUser {
   profileImg: string;
   passwordChangedAt?: Date;
   needsPasswordChange: boolean;
+  isDeleted: boolean;
 }

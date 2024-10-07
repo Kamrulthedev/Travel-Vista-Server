@@ -7,6 +7,7 @@ import { IUser } from './user.interface';
 import { User } from './user.model';
 import bcryptJs from 'bcryptjs';
 
+//create user
 const createUser = async (user: IUser, file: any) => {
   user.password = await bcryptJs.hash(
     user.password,
@@ -23,12 +24,15 @@ const createUser = async (user: IUser, file: any) => {
   return await User.create(user);
 };
 
+//get User By Id
 const findUserById = async (userId: string) => {
   return await User.findById(userId);
 };
 
+
+//Get All Users
 const getAllUsers = async (query: Record<string, unknown>) => {
-  const userQuery = new QueryBuilder(User.find(), query)
+  const userQuery = new QueryBuilder(User.find({ isDeleted: false }), query)
     .search(UserSearchableFields)
     .filter()
     .sort()
@@ -43,6 +47,8 @@ const getAllUsers = async (query: Record<string, unknown>) => {
   };
 };
 
+
+//Update User
 const updateUserById = async (userId: string, payload: Partial<IUser>) => {
   const result = await User.findByIdAndUpdate({ _id: userId }, payload, {
     new: true,
@@ -51,11 +57,24 @@ const updateUserById = async (userId: string, payload: Partial<IUser>) => {
   return result;
 };
 
+
+//delete User
 const deleteUserById = async (userId: string) => {
-  const result = await User.findByIdAndDelete(userId);
+  const result = await User.findByIdAndUpdate(
+    userId,
+    {
+      isDeleted: true,
+    },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
   return result;
 };
 
+
+//export all function
 export const UserService = {
   createUser,
   findUserById,

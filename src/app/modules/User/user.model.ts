@@ -40,6 +40,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     passwordChangedAt: {
       type: Date,
     },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,
