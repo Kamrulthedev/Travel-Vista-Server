@@ -4,12 +4,12 @@ Welcome to the TravelVista Server repository! This project serves as the backend
 
 ### 🛠️ Technologies Used
 
-1. • Node.js: Backend runtime environment.
-2. • Express: Web framework for building RESTful APIs.
-3. • Mongoose: Object Data Modeling (ODM) library for MongoDB.
-4. • JWT: JSON Web Tokens for secure authentication.
-5. • Bcrypt: Password hashing and security.
-6. • AmarPay: Payment system integration.
+- • Node.js: Backend runtime environment.
+- • Express: Web framework for building RESTful APIs.
+- • Mongoose: Object Data Modeling (ODM) library for MongoDB.
+- • JWT: JSON Web Tokens for secure authentication.
+- • Bcrypt: Password hashing and security.
+- • AmarPay: Payment system integration.
 
 ### 📁 Project Structure
 
@@ -68,18 +68,23 @@ npm install
    Environment Variables: Create a .env file in the root directory and configure the following:
 ```
 
-bash
-Copy code
+3. Environment Variables: Create a .env file in the root directory and configure the following:
+
+```bash
 DATABASE_URL=your-mongodb-url
 PORT=your-port
 JWT_SECRET=your-secret-key
-Run the Server:
+```
 
-bash
-Copy code
+4. Run the Server:
+
+```bash
 npm run start
-📋 Endpoints
-Authentication
+```
+
+### 📋 Endpoints
+
+#### Authentication
 Register User: POST /api/v1/auth/register
 Login User: POST /api/v1/auth/login
 User
