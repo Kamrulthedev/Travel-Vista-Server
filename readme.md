@@ -4,12 +4,12 @@ Welcome to the TravelVista Server repository! This project serves as the backend
 
 ### 🛠️ Technologies Used
 
-- • Node.js: Backend runtime environment.
-- • Express: Web framework for building RESTful APIs.
-- • Mongoose: Object Data Modeling (ODM) library for MongoDB.
-- • JWT: JSON Web Tokens for secure authentication.
-- • Bcrypt: Password hashing and security.
-- • AmarPay: Payment system integration.
+- Node.js: Backend runtime environment.
+- Express: Web framework for building RESTful APIs.
+- Mongoose: Object Data Modeling (ODM) library for MongoDB.
+- JWT: JSON Web Tokens for secure authentication.
+- Bcrypt: Password hashing and security.
+- AmarPay: Payment system integration.
 
 ### 📁 Project Structure
 
@@ -86,27 +86,25 @@ npm run start
 
 #### Authentication
 
-- • Register User: POST /api/v1/auth/register
-- • Login User: POST /api/v1/auth/login
--
--
+-  Register User: POST /api/v1/auth/register
+-  Login User: POST /api/v1/auth/login
 
 #### User
 
-- • Get User Details: GET /api/v1/users/:id
-- • Update User: PATCH /api/v1/users/:id
+-  Get User Details: GET /api/v1/users/:id
+-  Update User: PATCH /api/v1/users/:id
 
 #### Post
 
-- • Create Post: POST /api/v1/posts
-- • Get All Posts: GET /api/v1/posts
-- • Update Post: PATCH /api/v1/posts/:id
-- • Delete Post: DELETE /api/v1/posts/:id
+- Create Post: POST /api/v1/posts
+- Get All Posts: GET /api/v1/posts
+- Update Post: PATCH /api/v1/posts/:id
+- Delete Post: DELETE /api/v1/posts/:id
 
 #### Payments
 
-- • Create Payment: POST /api/v1/payments
-- • et Payment Details: GET /api/v1/payments/:id
+- Create Payment: POST /api/v1/payments
+- et Payment Details: GET /api/v1/payments/:id
 
 ### 🧪 Testing
 
@@ -122,16 +120,16 @@ For deployment:
 
 Install Heroku CLI and log in to your Heroku account:
 
-bash
-Copy code
+
 heroku login
 Create a Heroku App and push:
 
-bash
-Copy code
+
 heroku create your-app-name
 git push heroku main
-📧 Contact
+
+
+### 📧 Contact
 Feel free to reach out for any queries or issues.
 
 ```
