@@ -4,32 +4,44 @@ import mongoose, { Schema } from 'mongoose';
 import { validateEmail } from './user.utils';
 import { IUser } from './user.interface';
 
-const userSchema: Schema<IUser> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema: Schema<IUser> = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: true,
+      validate: [validateEmail, 'Please fill a valid email address'],
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        'Please fill a valid email address',
+      ],
+    },
+    password: {
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: ['admin', 'user'],
+      default: 'user',
+    },
+    img: { type: String },
+    needsPasswordChange: {
+      type: Boolean,
+      default: true,
+    },
+    passwordChangedAt: {
+      type: Date,
+    },
   },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-    required: true,
-    validate: [validateEmail, 'Please fill a valid email address'],
-    match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please fill a valid email address',
-    ],
+  {
+    timestamps: true,
   },
-  password: {
-    type: String,
-  },
-  role: {
-    type: String,
-    enum: ['admin', 'user'],
-    default: 'user',
-  },
-  img: { type: String },
-});
+);
 
 export const User = mongoose.model<IUser>('User', userSchema);

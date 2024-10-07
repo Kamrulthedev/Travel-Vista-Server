@@ -22,7 +22,7 @@ export const registerUserValidationSchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string().optional(),
-    img: z.string().optional(), // Updated to match schema
+    img: z.string().optional(), 
   }),
 });
 

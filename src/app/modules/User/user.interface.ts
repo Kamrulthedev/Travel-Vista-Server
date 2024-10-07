@@ -9,4 +9,5 @@ export interface IUser {
   address: string;
   img: string;
   passwordChangedAt?: Date;
+  needsPasswordChange: boolean;
 }

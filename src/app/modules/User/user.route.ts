@@ -8,11 +8,11 @@ import {
 import auth from '../../middlewares/auth';
 import { USER_Role } from './user.constant';
 
-
 const router = express.Router();
 
 router.post(
   '/create-user',
+  auth(USER_Role.admin, USER_Role.user),
   validateRequest(createUserValidationSchema),
   UserController.createUser,
 );
