@@ -19,8 +19,6 @@ export const SendImgToClodinary = (imageName: string, path: string) => {
         public_id: imageName,
       });
 
-      // console.log(uploadResult);
-
       // Ensure secure_url is part of the upload result
       const { secure_url } = uploadResult;
 
@@ -29,7 +27,7 @@ export const SendImgToClodinary = (imageName: string, path: string) => {
         fetch_format: "auto",
         quality: "auto",
       });
-      // console.log(optimizeUrl);
+     
 
       // Transform the image: auto-crop to square aspect_ratio
       const autoCropUrl = cloudinary.url(imageName, {
@@ -38,7 +36,7 @@ export const SendImgToClodinary = (imageName: string, path: string) => {
         width: 500,
         height: 500,
       });
-      // console.log(autoCropUrl);
+   
 
       resolve({ secure_url, optimizeUrl, autoCropUrl });
     } catch (error) {

@@ -30,7 +30,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
       enum: ['admin', 'user'],
       default: 'user',
     },
-    img: { type: String },
+    profileImg: { type: String },
     needsPasswordChange: {
       type: Boolean,
       default: true,
