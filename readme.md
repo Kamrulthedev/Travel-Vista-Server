@@ -86,13 +86,13 @@ npm run start
 
 #### Authentication
 
--  Register User: POST /api/v1/auth/register
--  Login User: POST /api/v1/auth/login
+- Register User: POST /api/v1/auth/register
+- Login User: POST /api/v1/auth/login
 
 #### User
 
--  Get User Details: GET /api/v1/users/:id
--  Update User: PATCH /api/v1/users/:id
+- Get User Details: GET /api/v1/users/:id
+- Update User: PATCH /api/v1/users/:id
 
 #### Post
 
@@ -115,21 +115,23 @@ npm run test
 ```
 
 ### 🌐 Deployment
-
 For deployment:
 
-Install Heroku CLI and log in to your Heroku account:
+1. Install Heroku CLI and log in to your Heroku account:
 
-
+```bash
 heroku login
-Create a Heroku App and push:
+```
 
+2.Create a Heroku App and push:
 
+```bash
 heroku create your-app-name
 git push heroku main
-
+```
 
 ### 📧 Contact
+
 Feel free to reach out for any queries or issues.
 
 ```
