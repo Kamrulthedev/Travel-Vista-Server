@@ -1,7 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import cors from 'cors';
 import express, { Application } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
@@ -15,11 +11,12 @@ app.use(express.json());
 
 app.use(cors({ origin: ['http://localhost:3000'] }));
 app.use(cookieParser())
+
 // application routes
 app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
-  res.status(200).json('Welcome to the Apollo Gears API Service');
+  res.status(200).json('Hello Travelar..................');
 });
 
 app.use(globalErrorHandler);
