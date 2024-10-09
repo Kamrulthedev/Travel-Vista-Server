@@ -22,9 +22,10 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         'Please fill a valid email address',
       ],
     },
-    phone: { type: String },
+    phone: { type: String , required: true},
     password: {
       type: String,
+      required: true
     },
     role: {
       type: String,

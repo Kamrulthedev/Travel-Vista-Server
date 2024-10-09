@@ -6,8 +6,8 @@ export interface IUser {
   password: string;
   phone: string;
   role:keyof typeof USER_Role;
-  address: string;
-  profileImg: string;
+  address?: string;
+  profileImg?: string;
   passwordChangedAt?: Date;
   needsPasswordChange: boolean;
   isDeleted: boolean;
