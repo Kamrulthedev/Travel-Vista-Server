@@ -16,8 +16,8 @@ const loginUser = async (payload: TLoginUser) => {
     const user = await registerUser(payload);
 
     const jwtPayload = {
-      email: user.email,
-      role: user.role,
+      email: user?.user?.email,
+      role: user?.user?.role,
     };
 
     const accessToken = createToken(
@@ -26,15 +26,9 @@ const loginUser = async (payload: TLoginUser) => {
       config.jwt_access_expires_in as string,
     );
 
-    const refreshToken = createToken(
-      jwtPayload,
-      config.jwt_refresh_secret as string,
-      config.jwt_refresh_expires_in as string,
-    );
-
     return {
       accessToken,
-      refreshToken,
+      user,
     };
   } else {
     if (payload.password) {
@@ -60,6 +54,7 @@ const loginUser = async (payload: TLoginUser) => {
     );
 
     return {
+      user,
       accessToken,
     };
   }
@@ -120,8 +115,6 @@ const registerUser = async (userData: TLoginUser, url?: any) => {
   };
 
 };
-
-
 
 
 export const AuthServices = {
