@@ -17,7 +17,7 @@ const refreshTokenValidationSchema = z.object({
   }),
 });
 
-export const registerUserValidationSchema = z.object({
+const registerUserValidationSchema = z.object({
   body: z.object({
     name: z.string(),
     email: z.string().email(),
@@ -29,5 +29,5 @@ export const registerUserValidationSchema = z.object({
 export const AuthValidation = {
   loginValidationSchema,
   refreshTokenValidationSchema,
-  registerUserValidationSchema,
+  registerUserValidationSchema
 };

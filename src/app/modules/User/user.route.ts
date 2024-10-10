@@ -13,11 +13,7 @@ const router = express.Router();
 
 router.post(
   '/create-user',
-  // upload.single("file"),
-  // (req: Request, res: Response, next: NextFunction) => {
-  //   req.body = JSON.parse(req.body.data);
-  //   next()
-  // },
+  auth(USER_Role.ADMIN),
   multerUpload.single('file'),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = JSON.parse(req.body.data);
@@ -29,26 +25,26 @@ router.post(
 
 router.get(
   '/',
-  auth(USER_Role.admin, USER_Role.user),
+  auth(USER_Role.ADMIN, USER_Role.USER),
   UserController.getAllUsers,
 );
 
 router.get(
   '/:id',
-  auth(USER_Role.admin, USER_Role.user),
+  auth(USER_Role.ADMIN, USER_Role.USER),
   UserController.findUserById,
 );
 
 router.patch(
   '/:id',
-  auth(USER_Role.admin, USER_Role.user),
+  auth(USER_Role.ADMIN, USER_Role.USER),
   validateRequest(updateUserValidationSchema),
   UserController.updateUserById,
 );
 
 router.delete(
   '/:id',
-  auth(USER_Role.admin, USER_Role.user),
+  auth(USER_Role.ADMIN, USER_Role.USER),
   UserController.deleteUserById,
 );
 

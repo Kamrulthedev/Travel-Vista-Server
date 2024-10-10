@@ -6,7 +6,7 @@ import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
 import { USER_Role } from '../User/user.constant';
-import { SendImgToClodinary } from '../../utils/sendImgToClodinary';
+
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -59,15 +59,8 @@ const loginUser = async (payload: TLoginUser) => {
       config.jwt_access_expires_in as string,
     );
 
-    const refreshToken = createToken(
-      jwtPayload,
-      config.jwt_refresh_secret as string,
-      config.jwt_refresh_expires_in as string,
-    );
-
     return {
       accessToken,
-      refreshToken,
     };
   }
 };
@@ -75,15 +68,40 @@ const loginUser = async (payload: TLoginUser) => {
 const refreshToken = async (token: string) => {
   // checking if the given token is valid
   const decoded = verifyToken(token, config.jwt_refresh_secret as string);
-
   const { email } = decoded;
-
   // checking if the user is exist
   const user = await User.findOne({ email: email });
-
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
   }
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+  };
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+  return {
+    accessToken,
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const registerUser = async (userData: TLoginUser, url?: any) => {
+  if (userData.password) {
+    userData.password = await bcryptJs.hash(
+      userData.password,
+      Number(config.bcrypt_salt_rounds),
+    );
+  }
+  userData.profileImg = url;
+
+  const user = await User.create({
+    ...userData,
+    role: USER_Role.USER,
+  });
 
   const jwtPayload = {
     email: user.email,
@@ -93,38 +111,18 @@ const refreshToken = async (token: string) => {
   const accessToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
-    config.jwt_access_expires_in as string,
+    config.jwt_access_expires_in as string
   );
 
   return {
+    user,
     accessToken,
   };
+
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const registerUser = async (userData: TLoginUser, file?: any) => {
-  if (userData.password) {
-    userData.password = await bcryptJs.hash(
-      userData.password,
-      Number(config.bcrypt_salt_rounds),
-    );
-  }
 
-  //create imageName and Path
-  const imageName = `${userData?.name}`;
-  const path = file?.path;
-  //send Img cludinary
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { secure_url }: any = await SendImgToClodinary(imageName, path);
-  userData.profileImg = secure_url;
 
-  const user = await User.create({
-    ...userData,
-    role: USER_Role.user,
-  });
-
-  return user;
-};
 
 export const AuthServices = {
   loginUser,

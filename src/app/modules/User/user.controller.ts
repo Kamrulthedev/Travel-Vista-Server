@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 
 const createUser = catchAsync(async (req, res) => {
   const url = req.file?.path;
+  console.log(req.body);
   const result = await UserService.createUser(req.body, url);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,

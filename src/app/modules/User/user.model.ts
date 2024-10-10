@@ -22,15 +22,14 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         'Please fill a valid email address',
       ],
     },
-    phone: { type: String , required: true},
+    phone: { type: String },
     password: {
-      type: String,
-      required: true
+      type: String
     },
     role: {
       type: String,
-      enum: ['admin', 'user'],
-      default: 'user',
+      enum: ['ADMIN', 'USER'],
+      default: 'USER',
     },
     profileImg: { type: String },
     address: { type: String },

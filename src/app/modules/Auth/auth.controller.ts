@@ -36,7 +36,13 @@ const refreshToken = catchAsync(async (req, res) => {
 });
 
 const registerUser = catchAsync(async (req, res) => {
-  const result = await AuthServices.registerUser(req.body, req.file);
+  const result = await AuthServices.registerUser(req.body, req.file?.path);
+  const { accessToken } = result;
+
+  res.cookie('refreshToken', refreshToken, {
+    secure: config.NODE_ENV === 'production',
+    httpOnly: true,
+  });
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
