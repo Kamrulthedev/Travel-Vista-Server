@@ -49,6 +49,10 @@ const registerUser = async (payload: TRegisterUser) => {
     refreshToken,
   };
 };
+
+
+
+
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
   const user = await User.isUserExistsByEmail(payload?.email);
