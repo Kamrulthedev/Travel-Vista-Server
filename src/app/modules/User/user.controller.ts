@@ -34,7 +34,6 @@ const getSingleUser = catchAsync(async (req, res) => {
 });
 
 
-
 export const UserControllers = {
   getSingleUser,
   userRegister,

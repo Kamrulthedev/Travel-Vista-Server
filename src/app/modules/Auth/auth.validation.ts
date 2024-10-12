@@ -10,7 +10,7 @@ const registerValidationSchema = z.object({
     }),
     password: z.string({ required_error: 'Password is required' }),
     phone: z.string({ required_error: 'Mobile number is required' }),
-    profileImg: z.string(),
+    profileImg: z.string().optional(),
   }),
 });
 
