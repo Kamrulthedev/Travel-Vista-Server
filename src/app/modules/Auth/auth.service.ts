@@ -25,6 +25,7 @@ const registerUser = async (payload: TRegisterUser) => {
     phone: newUser.phone,
     role: newUser.role,
     status: newUser.status,
+    profileImg: newUser.profileImg
   };
 
   const accessToken = createToken(
@@ -45,9 +46,6 @@ const registerUser = async (payload: TRegisterUser) => {
   };
 };
 
-
-
-
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
   const user = await User.isUserExistsByEmail(payload?.email);
@@ -57,7 +55,6 @@ const loginUser = async (payload: TLoginUser) => {
   }
 
   // checking if the user is blocked
-
   const userStatus = user?.status;
 
   if (userStatus === 'BLOCKED') {
@@ -65,19 +62,18 @@ const loginUser = async (payload: TLoginUser) => {
   }
 
   //checking if the password is correct
-
   if (!(await User.isPasswordMatched(payload?.password, user?.password)))
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
 
   //create token and sent to the  client
-
   const jwtPayload = {
     _id: user._id,
     name: user.name,
     email: user.email,
-    mobileNumber: user.phone,
+    phone: user.phone,
     role: user.role,
     status: user.status,
+    profileImg: user.profileImg,
   };
 
   const accessToken = createToken(
@@ -110,7 +106,6 @@ const changePassword = async (
   }
 
   // checking if the user is blocked
-
   const userStatus = user?.status;
 
   if (userStatus === 'BLOCKED') {
@@ -118,7 +113,6 @@ const changePassword = async (
   }
 
   //checking if the password is correct
-
   if (!(await User.isPasswordMatched(payload.oldPassword, user?.password)))
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
 
@@ -157,10 +151,8 @@ const refreshToken = async (token: string) => {
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
   }
-
   // checking if the user is blocked
   const userStatus = user?.status;
-
   if (userStatus === 'BLOCKED') {
     throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked!');
   }
@@ -171,14 +163,14 @@ const refreshToken = async (token: string) => {
   ) {
     throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized !');
   }
-
   const jwtPayload = {
     _id: user._id,
     name: user.name,
     email: user.email,
-    mobileNumber: user.phone,
+    phone: user.phone,
     role: user.role,
     status: user.status,
+    profileImg: user.profileImg
   };
 
   const accessToken = createToken(
