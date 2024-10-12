@@ -17,9 +17,10 @@ const likePost = async (userId: string, postId: string) => {
   return like;
 };
 
-export const unlikePost = async (userId: string, postId: string) => {
-  const like = await Like.findOneAndDelete({ user: userId, post: postId });
 
+
+const unlikePost = async (userId: string, postId: string) => {
+  const like = await Like.findOneAndDelete({ user: userId, post: postId });
   if (!like) {
     throw new Error('You have not liked this post.');
   }
