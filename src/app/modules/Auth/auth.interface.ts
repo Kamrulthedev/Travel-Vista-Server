@@ -8,7 +8,8 @@ export type TLoginUser = {
 export type TRegisterUser = {
   name: string;
   email: string;
-  mobileNumber: string;
+  phone: string;
   password: string;
+  address?: string;
   role: keyof typeof USER_ROLE;
 };

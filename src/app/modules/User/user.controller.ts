@@ -5,7 +5,6 @@ import { UserServices } from './user.service';
 
 const userRegister = catchAsync(async (req, res) => {
   const user = await UserServices.createUser(req.body);
-
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -16,7 +15,6 @@ const userRegister = catchAsync(async (req, res) => {
 
 const getAllUsers = catchAsync(async (req, res) => {
   const users = await UserServices.getAllUsersFromDB(req.query);
-
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -27,7 +25,6 @@ const getAllUsers = catchAsync(async (req, res) => {
 
 const getSingleUser = catchAsync(async (req, res) => {
   const user = await UserServices.getSingleUserFromDB(req.params.id);
-
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -35,6 +32,8 @@ const getSingleUser = catchAsync(async (req, res) => {
     data: user,
   });
 });
+
+
 
 export const UserControllers = {
   getSingleUser,

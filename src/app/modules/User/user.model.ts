@@ -38,11 +38,11 @@ const userSchema = new Schema<TUser, IUserModel>(
     passwordChangedAt: {
       type: Date,
     },
-    mobileNumber: {
+    phone: {
       type: String,
       required: true,
     },
-    profilePhoto: {
+    profileImg: {
       type: String,
       default: null
     },

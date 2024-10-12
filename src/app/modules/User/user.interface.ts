@@ -10,8 +10,8 @@ export type TUser = {
   password: string;
   status: keyof typeof USER_STATUS;
   passwordChangedAt?: Date;
-  mobileNumber?: string;
-  profilePhoto?: string;
+  phone?: string;
+  profileImg?: string;
   createdAt?: Date;
   updatedAt?: Date;
 };
