@@ -1,4 +1,4 @@
-## 🚀 TravelVista Server
+## 🚀 Travel Vista Server
 
 Welcome to the TravelVista Server repository! This project serves as the backend for the TravelVista application, a travel tips and destination guides platform.
 
