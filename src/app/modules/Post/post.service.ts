@@ -1,13 +1,35 @@
 import { TPost } from './post.interface';
 import { Post } from './post.model';
 
-export const createPost = async (payload: TPost, image: string) => {
+const createPost = async (payload: TPost, image: string) => {
   payload.image = image;
 
   const result = await Post.create(payload);
   return result;
 };
 
+const getPostById = async (postId: string) => {
+  return await Post.findById(postId).populate('likedBy');
+};
+
+const getAllPosts = async () => {
+  return await Post.find().populate('likedBy');
+};
+
+const updatePost = async (postId: string, updatedData: TPost) => {
+  const post = await Post.findByIdAndUpdate(postId, updatedData, { new: true });
+  return post;
+};
+ const deletePost = async (postId: string) => {
+    const post = await Post.findByIdAndDelete(postId);
+    return post;
+  };
+  
+
 export const PostServices = {
   createPost,
+  getPostById,
+  getAllPosts,
+  updatePost,
+  deletePost
 };

@@ -1,30 +1,33 @@
+import httpStatus from 'http-status';
+import { catchAsync } from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { PostServices } from '../Post/post.service';
 
+export const likePost = catchAsync(async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user.id;
+  const post = await PostServices.likePost(postId, userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Post liked successfully',
+    data: post,
+  });
+});
 
-// Like a post
-exports.likePost = async (req, res) => {
-    try {
-      const userId = req.user.id;
-      const postId = req.params.postId;
-  
-      const like = await LikeService.likePost(userId, postId);
-      res.status(200).json(like);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+export const unlikePost = catchAsync(async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user.id;
+  const post = await PostServices.unlikePost(postId, userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Post unliked successfully',
+    data: post,
+  });
+});
 
-
-  
-  // Unlike a post
-  exports.unlikePost = async (req, res) => {
-    try {
-      const userId = req.user.id;
-      const postId = req.params.postId;
-  
-      await LikeService.unlikePost(userId, postId);
-      res.status(200).json({ message: 'Post unliked' });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
-  
+export const LikeControllar = {
+  likePost,
+  unlikePost,
+};
