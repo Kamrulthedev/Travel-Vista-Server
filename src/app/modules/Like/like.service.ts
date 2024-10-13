@@ -3,9 +3,7 @@ import { Post } from '../Post/post.model';
 import { Like } from './like.model';
 
 const likePost = async (userId: string, postId: string) => {
-  console.log(userId, postId)
   const existingLike = await Like.findOne({ user: userId, post: postId });
-  console.log(existingLike)
   if (existingLike) {
     throw new Error('You already liked this post.');
   }

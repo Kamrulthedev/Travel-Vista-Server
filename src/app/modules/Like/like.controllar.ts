@@ -1,4 +1,3 @@
-
 import httpStatus from 'http-status';
 import { catchAsync } from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
@@ -7,10 +6,7 @@ import { Post } from '../Post/post.model';
 
 export const likePost = catchAsync(async (req, res) => {
   const postId = req.params?.postId;
-  const userId = req.user?._id;
-
-  console.log()
-
+  const userId = req.body?.user;
   // Call likePost method from LikeService
   const post = await LikeService.likePost(userId, postId);
 
@@ -24,7 +20,7 @@ export const likePost = catchAsync(async (req, res) => {
     message: 'Post liked successfully',
     data: {
       updatedPost,
-      post
+      post,
     },
   });
 });
