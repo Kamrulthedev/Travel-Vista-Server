@@ -32,19 +32,15 @@ const unlikePost = async (userId: string, postId: string) => {
   if (!like) {
     throw new Error('You have not liked this post.');
   }
-
   // Find the post and decrement the like count
   const post = await Post.findById(postId);
-
   if (!post) {
     throw new Error('Post not found.');
   }
-
   // Ensure that the post's like count doesn't go below 0
   if (post.likes > 0) {
     post.likes -= 1;
   }
-
   await post.save();
 };
 
