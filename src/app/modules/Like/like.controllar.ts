@@ -26,8 +26,8 @@ export const likePost = catchAsync(async (req, res) => {
 });
 
 export const unlikePost = catchAsync(async (req, res) => {
-  const postId = req.params.id;
-  const userId = req.user.id;
+  const postId = req.params?.postId;
+  const userId = req.user._id;
   const post = await LikeService.unlikePost(postId, userId);
   sendResponse(res, {
     success: true,

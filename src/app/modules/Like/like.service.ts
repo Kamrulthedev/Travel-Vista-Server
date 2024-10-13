@@ -23,13 +23,15 @@ const likePost = async (userId: string, postId: string) => {
   return like;
 };
 
-const unlikePost = async (userId: string, postId: string) => {
+
+//like Post
+const unlikePost = async (postId: string, userId: string) => {
   // Find and remove the like
-  const like = await Like.findOneAndDelete({ user: userId, post: postId });
+  const like = await Like.find({ user: userId, post: postId });
   if (!like) {
     throw new Error('You have not liked this post.');
   }
-  // Find the post and decrement the like count
+  // Find the post
   const post = await Post.findById(postId);
   if (!post) {
     throw new Error('Post not found.');
@@ -37,9 +39,17 @@ const unlikePost = async (userId: string, postId: string) => {
   // Ensure that the post's like count doesn't go below 0
   if (post.likes > 0) {
     post.likes -= 1;
+    // Remove the user from the likedBy array
+    post.likedBy = post.likedBy.filter(
+      (user) => user.toString() !== userId
+    );
   }
+  // Save the post with updated likes and likedBy array
   await post.save();
 };
+
+
+
 
 export const LikeService = {
   likePost,

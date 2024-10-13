@@ -12,6 +12,10 @@ router.post(
 );
 
 // Unlike a post
-router.delete('/unlike/post/:postId', LikeControllar.unlikePost);
+router.delete(
+  '/unlike/post/:postId',
+  auth(USER_ROLE.ADMIN, USER_ROLE.USER),
+  LikeControllar.unlikePost
+);
 
 export const LikeRoutes = router;
