@@ -6,10 +6,12 @@ import sendResponse from '../../utils/sendResponse';
 import { PostServices } from './post.service';
 
 const createPost = catchAsync(async (req, res) => {
-  if (!req.files) {
+
+  console.log(req.user)
+  if (!req.file) {
     throw new AppError(400, 'Please upload an image');
   }
-  const result = await PostServices.createPost(req.body, req.files as any);
+  const result = await PostServices.createPost(req.body, req.file.path as any, req?.user?._id);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
