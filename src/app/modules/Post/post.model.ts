@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,  // Ensure a user is always associated with a post
+      required: true, 
     },
     title: {
       type: String,
@@ -15,7 +15,7 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: String,  // Assuming the image field is optional
+    image: String, 
     likes: {
       type: Number,
       default: 0,
@@ -24,8 +24,16 @@ const postSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        default: []
       },
     ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+        default: []
+      },
+    ]
   },
   {
     timestamps: true,

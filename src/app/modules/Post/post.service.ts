@@ -1,13 +1,17 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TPost } from './post.interface';
 import { Post } from './post.model';
 
-const createPost = async (payload: TPost, image: string, id: any) => {
-  payload.user = id;
+const createPost = async (payload: TPost, image: string) => {
   payload.image = image;
-  const result = await Post.create(payload);
+
+  const result = await (await Post.create(payload))
+    .populate('userId');
+
   return result;
 };
+
 
 const getPostById = async (postId: string) => {
   return await Post.findById(postId).populate('likedBy');
