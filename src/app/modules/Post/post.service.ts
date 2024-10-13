@@ -5,10 +5,8 @@ import { Post } from './post.model';
 
 const createPost = async (payload: TPost, image: string) => {
   payload.image = image;
-
   const result = await (await Post.create(payload))
     .populate('userId');
-
   return result;
 };
 

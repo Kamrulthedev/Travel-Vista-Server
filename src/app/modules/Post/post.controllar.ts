@@ -31,6 +31,8 @@ const getPostById = catchAsync(async (req, res) => {
   });
 });
 
+
+
 const getAllPosts = catchAsync(async (req, res) => {
   const posts = await PostServices.getAllPosts();
   sendResponse(res, {
@@ -39,6 +41,8 @@ const getAllPosts = catchAsync(async (req, res) => {
     data: posts,
   });
 });
+
+
 
 const updatePost = catchAsync(async (req, res) => {
   const postId = req.params.id;

@@ -15,8 +15,15 @@ validateRequest(ValidatedPost.createPostValidationSchema), PostControllar.create
 
 
 router.get('/:id', PostControllar.getPostById);
+
+
 router.get('/', PostControllar.getAllPosts);
+
+
 router.put('/:id', PostControllar.updatePost);
+
+
 router.delete('/:id', PostControllar.deletePost);
+
 
 export const PostRoutes = router;
