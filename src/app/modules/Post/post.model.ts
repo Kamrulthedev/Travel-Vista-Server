@@ -1,15 +1,21 @@
-import mongoose from 'mongoose';
-import { TPost } from './post.interface';
+import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema<TPost>(
+const postSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: true,  // Ensure a user is always associated with a post
     },
-    title: String,
-    description: String,
-    image: String,
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    image: String,  // Assuming the image field is optional
     likes: {
       type: Number,
       default: 0,
@@ -23,8 +29,12 @@ const postSchema = new mongoose.Schema<TPost>(
   },
   {
     timestamps: true,
-    virtuals: true,
   }
 );
+
+// Optional: Add a virtual field for the like count
+postSchema.virtual('likeCount').get(function () {
+  return this.likedBy.length;
+});
 
 export const Post = mongoose.model('Post', postSchema);

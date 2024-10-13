@@ -3,10 +3,8 @@ import { TPost } from './post.interface';
 import { Post } from './post.model';
 
 const createPost = async (payload: TPost, image: string, id: any) => {
-  console.log(id);
   payload.user = id;
   payload.image = image;
-console.log(payload)
   const result = await Post.create(payload);
   return result;
 };

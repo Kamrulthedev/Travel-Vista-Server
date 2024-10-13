@@ -1,18 +1,31 @@
+
 import httpStatus from 'http-status';
 import { catchAsync } from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { LikeService } from './like.service';
+import { Post } from '../Post/post.model';
 
 export const likePost = catchAsync(async (req, res) => {
   const postId = req.params?.postId;
   const userId = req.user?._id;
-  console.log(req.params.postId)
-  const post = await LikeService.likePost(postId, userId);
+
+  console.log()
+
+  // Call likePost method from LikeService
+  const post = await LikeService.likePost(userId, postId);
+
+  // Fetch the updated post after liking it
+  const updatedPost = await Post.findById(postId).populate('likedBy');
+
+  // Send the response with the updated post
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: 'Post liked successfully',
-    data: post,
+    data: {
+      updatedPost,
+      post
+    },
   });
 });
 

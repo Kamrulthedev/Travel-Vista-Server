@@ -1,28 +1,27 @@
+import mongoose from 'mongoose';
 import { Post } from '../Post/post.model';
 import { Like } from './like.model';
 
 const likePost = async (userId: string, postId: string) => {
-  // Check if the user has already liked the post
+  console.log(userId, postId)
   const existingLike = await Like.findOne({ user: userId, post: postId });
+  console.log(existingLike)
   if (existingLike) {
     throw new Error('You already liked this post.');
   }
-  // Create a new Like
   const like = new Like({
-    user: userId,
-    post: postId,
+    user: new mongoose.Types.ObjectId(userId),
+    post: new mongoose.Types.ObjectId(postId),
   });
-  // Save the like
   await like.save();
-
-  // Find the post and increment the like count
   const post = await Post.findById(postId);
-  if (!post) {
-    throw new Error('Post not found.');
+  if (post) {
+    (post.likedBy as mongoose.Types.ObjectId[]).push(
+      new mongoose.Types.ObjectId(userId)
+    );
+    post.likes += 1;
+    await post.save();
   }
-  post.likes += 1;
-  await post.save();
-
   return like;
 };
 
