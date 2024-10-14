@@ -12,7 +12,7 @@ const verifySchema = new mongoose.Schema<TVerify>(
       type: String,
       required: true,
     },
-    ammount: {
+    amount: {
       type: String,
       required: true,
     },

@@ -15,3 +15,9 @@ export const UserSearchableFields = [
   'role',
   'status',
 ];
+
+export const Verify_SATUS = {
+  PANDING: 'pending',
+  VERIFIED: 'verified',
+  REJECTED: 'rejected',
+};

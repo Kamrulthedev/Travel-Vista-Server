@@ -5,8 +5,9 @@ import { Verify } from './verify.model';
 
 const verifyAccount = async (verifyData: any) => {
   console.log(verifyData)
-  const { userId, ammount, name, email, phone, addess } = verifyData;
+  const { userId, amount, name, email, phone, addess } = verifyData;
   const user = await User.findById(userId);
+  console.log("user", user)
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'User Is Found');
   }
@@ -16,7 +17,7 @@ const verifyAccount = async (verifyData: any) => {
   const AccountData = new Verify({
     user: userId,
     name,
-    ammount,
+    amount,
     email,
     phone,
     addess,

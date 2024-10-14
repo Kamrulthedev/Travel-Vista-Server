@@ -2,7 +2,7 @@
 import bcryptjs from 'bcryptjs';
 import { Schema, model } from 'mongoose';
 import config from '../../config';
-import { USER_ROLE, USER_STATUS } from './user.constant';
+import { USER_ROLE, USER_STATUS, Verify_SATUS } from './user.constant';
 import { IUserModel, TUser } from './user.interface';
 
 const userSchema = new Schema<TUser, IUserModel>(
@@ -44,7 +44,12 @@ const userSchema = new Schema<TUser, IUserModel>(
     },
     profileImg: {
       type: String,
-      default: null
+      default: null,
+    },
+    accountStatus: {
+      type: String,
+      enum: Object.keys(Verify_SATUS),
+      default: Verify_SATUS.PANDING,
     },
   },
   {
@@ -55,13 +60,14 @@ const userSchema = new Schema<TUser, IUserModel>(
 
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this; // doc
-  // hashing password and save into DB
+  const user = this;
 
-  user.password = await bcryptjs.hash(
-    user.password,
-    Number(config.bcrypt_salt_rounds)
-  );
+  if (user.isModified('password')) {
+    user.password = await bcryptjs.hash(
+      String(user.password), 
+      Number(config.bcrypt_salt_rounds)
+    );
+  }
 
   next();
 });

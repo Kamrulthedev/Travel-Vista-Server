@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Model } from 'mongoose';
-import { USER_ROLE, USER_STATUS } from './user.constant';
+import { USER_ROLE, USER_STATUS, Verify_SATUS } from './user.constant';
 
 export type TUser = {
   _id?: string;
@@ -12,9 +12,10 @@ export type TUser = {
   passwordChangedAt?: Date;
   phone?: string;
   profileImg?: string;
+  accountStatus: keyof typeof Verify_SATUS;
   createdAt?: Date;
   updatedAt?: Date;
-};
+} | undefined;
 
 export interface IUserModel extends Model<TUser> {
   isUserExistsByEmail(id: string): Promise<TUser>;
