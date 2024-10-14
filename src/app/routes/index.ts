@@ -3,6 +3,7 @@ import { AuthRoutes } from '../modules/Auth/auth.route';
 import { UserRoutes } from '../modules/User/user.route';
 import { PostRoutes } from '../modules/Post/post.route';
 import { LikeRoutes } from '../modules/Like/like.route';
+import { VerifyRoutes } from '../modules/Verify/verify.route';
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
   {
     path: "/like",
     route: LikeRoutes
+  },
+  {
+    path: "/verify",
+    route: VerifyRoutes
   }
 ];
 

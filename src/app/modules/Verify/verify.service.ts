@@ -4,6 +4,7 @@ import { User } from '../User/user.model';
 import { Verify } from './verify.model';
 
 const verifyAccount = async (verifyData: any) => {
+  console.log(verifyData)
   const { userId, ammount, name, email, phone, addess } = verifyData;
   const user = await User.findById(userId);
   if (!user) {
