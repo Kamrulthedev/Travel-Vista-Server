@@ -61,7 +61,6 @@ const userSchema = new Schema<TUser, IUserModel>(
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-
   if (user.isModified('password')) {
     user.password = await bcryptjs.hash(
       String(user.password), 

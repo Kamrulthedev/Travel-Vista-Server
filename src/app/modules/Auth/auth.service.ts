@@ -9,13 +9,11 @@ import { User } from '../User/user.model';
 import { TLoginUser, TRegisterUser } from './auth.interface';
 
 const registerUser = async (payload: TRegisterUser) => {
-  // checking if the user is exist
   const user = await User.isUserExistsByEmail(payload?.email);
   if (user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is already exist!');
   }
   payload.role = USER_ROLE.USER;
-  //create new user
   const newUser = await User.create(payload);
   //create token and sent to the  client
   const jwtPayload = {
