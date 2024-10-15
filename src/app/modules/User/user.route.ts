@@ -14,6 +14,8 @@ export const UserRoutes = router;
 router.post(
   '/create-user',
   auth(USER_ROLE.ADMIN),
+  multerUpload.single('profileImg'),
+  parseBody,
   validateRequest(UserValidation.createUserValidationSchema),
   UserControllers.userRegister
 );

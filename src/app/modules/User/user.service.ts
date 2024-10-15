@@ -5,9 +5,13 @@ import AppError from '../../errors/AppError';
 import { USER_STATUS, UserSearchableFields } from './user.constant';
 import { TUser } from './user.interface';
 import { User } from './user.model';
-import { JwtPayload } from "jsonwebtoken";
+import { JwtPayload } from 'jsonwebtoken';
 
-const createUser = async (payload: TUser) => {
+const createUser = async (payload: TUser, url: string) => {
+  console.log(url);
+  if (payload) {
+    payload.profileImg = url;
+  }
   const user = await User.create(payload);
   return user;
 };
@@ -28,7 +32,6 @@ const getSingleUserFromDB = async (id: string) => {
   return user;
 };
 
-
 //update user
 const updateUser = async (
   user: JwtPayload,
@@ -36,23 +39,20 @@ const updateUser = async (
   profileImg: any
 ) => {
   const filter = {
-      email: user.email,
-      status: USER_STATUS.ACTIVE
+    email: user.email,
+    status: USER_STATUS.ACTIVE,
   };
   const profile = await User.findOne(filter);
   if (!profile) {
-      throw new AppError(httpStatus.NOT_FOUND, "User profile does not exixts!")
-  };
-  if (profileImg) {
-      data.profileImg = profileImg;
+    throw new AppError(httpStatus.NOT_FOUND, 'User profile does not exixts!');
   }
-  else {
-      delete data.profileImg;
-  };
+  if (profileImg) {
+    data.profileImg = profileImg;
+  } else {
+    delete data.profileImg;
+  }
   return await User.findOneAndUpdate(filter, data, { new: true });
 };
-
-
 
 // const UpdateProfileImg = async( user: any, img: any) =>{
 //   const filter = {
@@ -72,11 +72,9 @@ const updateUser = async (
 // return await User.findOneAndUpdate(filter, data, { new: true });
 // }
 
-
-
 export const UserServices = {
   createUser,
   getAllUsersFromDB,
   getSingleUserFromDB,
-  updateUser
+  updateUser,
 };

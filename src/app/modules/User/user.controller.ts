@@ -5,7 +5,8 @@ import { UserServices } from './user.service';
 import AppError from '../../errors/AppError';
 
 const userRegister = catchAsync(async (req, res) => {
-  const user = await UserServices.createUser(req.body);
+  console.log(req.file)
+  const user = await UserServices.createUser(req.body, req.file?.path as string);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

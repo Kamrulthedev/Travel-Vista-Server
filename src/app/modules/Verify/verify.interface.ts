@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export type TVerify = {
-  userId: mongoose.Types.ObjectId;
+  userId?: mongoose.Types.ObjectId;
   amount: string;
   name: string;
   email: string;
