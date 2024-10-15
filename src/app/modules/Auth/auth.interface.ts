@@ -1,4 +1,4 @@
-import { USER_ROLE } from '../User/user.constant';
+import { USER_ROLE, Verify_SATUS } from '../User/user.constant';
 
 export type TLoginUser = {
   email: string;
@@ -12,4 +12,5 @@ export type TRegisterUser = {
   password: string;
   address?: string;
   role: keyof typeof USER_ROLE;
+  accountStatus?: keyof typeof Verify_SATUS;
 };
