@@ -17,7 +17,7 @@ export const UserSearchableFields = [
 ];
 
 export const Verify_SATUS = {
-  PANDING: 'PENDING',
+  PENDING: 'PENDING',
   VERIFIED: 'VERIFIED',
   REJECTED: 'REJECTED',
 };

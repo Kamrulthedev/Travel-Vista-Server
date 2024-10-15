@@ -20,7 +20,7 @@ const createUserValidationSchema = z.object({
     }),
     status: z.nativeEnum(USER_STATUS).default(USER_STATUS.ACTIVE),
     phone: z.string(),
-    accountStatus: z.nativeEnum(Verify_SATUS).default(Verify_SATUS.PANDING)
+    accountStatus: z.nativeEnum(Verify_SATUS).default(Verify_SATUS.PENDING)
   }),
 });
 

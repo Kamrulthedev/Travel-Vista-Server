@@ -48,8 +48,8 @@ const userSchema = new Schema<TUser, IUserModel>(
     },
     accountStatus: {
       type: String,
-      enum: Object.keys(Verify_SATUS),
-      default: Verify_SATUS.PANDING,
+      enum: Object.values(Verify_SATUS),
+      default: Verify_SATUS.PENDING,    
     },
   },
   {
